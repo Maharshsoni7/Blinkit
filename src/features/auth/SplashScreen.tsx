@@ -10,7 +10,7 @@ const SplashScreen: FC = () => {
 
     const navigateUser = () => {
       try {
-        navigate('CustomerLogin'); 
+        navigate('CustomerLogin');
       }
       catch (error) {
         console.error('Error navigating from SplashScreen:', error);
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   logoImage: {
-    width: screenWidth * 0.7,
-    height: screenHeight * 0.7,
+    width: screenWidth * 0.4,
+    height: screenHeight * 0.4,
     resizeMode: 'contain',
   },
 

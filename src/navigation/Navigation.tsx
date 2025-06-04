@@ -7,6 +7,7 @@ import { navigationRef } from '@utils/NavigationUtils';
 import SplashScreen from '@features/auth/SplashScreen';
 import CustomerLogin from '@features/auth/CustomerLogin';
 import DeliveryLogin from '@features/auth/DeliveryLogin';
+import ProductDashboard from '@features/dashboard/productDashboard';
 
 
 
@@ -28,6 +29,9 @@ const Navigation: FC = () => (
         >
             <Stack.Screen
                 name={'SplashScreen'} options={{ headerShown: false }} component={SplashScreen}
+            />
+            <Stack.Screen
+                name={'ProductDashboard'} options={{ headerShown: false }} component={ProductDashboard}
             />
             <Stack.Screen
                 name={'CustomerLogin'} options={{ animation: 'fade' }} component={CustomerLogin}

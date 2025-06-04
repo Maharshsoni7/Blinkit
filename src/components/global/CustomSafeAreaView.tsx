@@ -10,10 +10,10 @@ interface CustomSafeAreaViewProps {
 
 const CustomSafeAreaView: FC<CustomSafeAreaViewProps> = ({ children, style }) => {
     return (
-        <View style={[styles.container, style]}>
-            <SafeAreaView />
-            {children}
-        </View>
+        <SafeAreaView style={[styles.container, style]}>
+            {/* <SafeAreaView /> */}
+            <View style={[styles.container, style]}>{children}</View>
+        </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({

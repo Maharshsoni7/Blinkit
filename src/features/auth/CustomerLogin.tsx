@@ -1,4 +1,5 @@
-import { View, StyleSheet, SafeAreaView, Animated, Image, } from 'react-native'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { View, StyleSheet, SafeAreaView, Animated, Image, Keyboard, Alert, TouchableOpacity, Platform, } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { GestureHandlerRootView, PanGestureHandler, State } from 'react-native-gesture-handler'
 import CustomSafeAreaView from '@components/global/CustomSafeAreaView'
@@ -10,6 +11,9 @@ import { resetAndNavigate } from '@utils/NavigationUtils'
 import useKeyboardOffsetHeight from '@utils/useKeyboardOffsetHeight'
 import LinearGradient from 'react-native-linear-gradient'
 import CustomInput from '@components/ui/CustomInput'
+import CustomButton from '@components/ui/CustomButton'
+import { customerLogin } from '@service/authService'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const bottomColors = [...lightColors].reverse()
 const CustomerLogin = () => {
@@ -36,6 +40,7 @@ const CustomerLogin = () => {
                 useNativeDriver: true,
             }).start();
         }
+
     }, [keyboardOffsetHeight])
 
     const handleGesture = ({ nativeEvent }: any) => {
@@ -58,6 +63,19 @@ const CustomerLogin = () => {
         }
     }
 
+    const handleAuth = async () => {
+        Keyboard.dismiss();
+        setLoading(true);
+        try {
+            // await customerLogin(phoneNumber)
+            resetAndNavigate('ProductDashboard');
+        } catch (error) {
+            Alert.alert('Login Error', 'Something went wrong, please try again later.');
+        }
+        finally {
+            setLoading(false);
+        }
+    }
     return (
         <GestureHandlerRootView style={styles.container}>
             <View style={styles.container}>
@@ -98,22 +116,32 @@ const CustomerLogin = () => {
                                         </CustomText>
                                     }
                                 />
+                                <CustomButton
+                                    disabled={phoneNumber.length !== 10}
+                                    onPress={() => { handleAuth() }}
+                                    loading={loading}
+                                    title='Continue'
+                                />
 
                             </View>
                         </Animated.ScrollView>
                     </PanGestureHandler>
 
-                    <View style={styles.footer}>
-                        <SafeAreaView />
-                        <CustomText fontSize={RFValue(6)}  >
-                            By continuing, you agree to our Terms of Service and Privacy Policy
-                        </CustomText>
-                        <SafeAreaView />
-                    </View>
+
 
                 </CustomSafeAreaView>
+                <View style={styles.footer}>
+                    <SafeAreaView />
+                    <CustomText fontSize={RFValue(6)}  >
+                        By continuing, you agree to our Terms of Service and Privacy Policy
+                    </CustomText>
+                    <SafeAreaView />
+                </View>
+                <TouchableOpacity style={styles.absoluteSwitchButton} onPress={() => { resetAndNavigate('DeliveryLogin') }}>
+                    <Icon name='bike-fast' color={'#000'} size={RFValue(18)} />
+                </TouchableOpacity>
             </View>
-        </GestureHandlerRootView>
+        </GestureHandlerRootView >
     )
 }
 const styles = StyleSheet.create({
@@ -167,6 +195,24 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingHorizontal: 20,
         paddingBottom: 20,
+    },
+    absoluteSwitchButton: {
+        position: 'absolute',
+        top: Platform.OS === 'ios' ? 50 : 30,
+        backgroundColor: '#fff',
+        zIndex: 99,
+        right: 10,
+        height: 55,
+        width: 55,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.5,
+        shadowRadius: 12,
+        padding: 10,
+        borderRadius: 50,
+        elevation: 10,
     }
 })
 export default CustomerLogin
