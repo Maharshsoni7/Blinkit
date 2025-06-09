@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { View, StyleSheet, SafeAreaView, Animated, Image, Keyboard, Alert, TouchableOpacity, Platform, } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
-import { GestureHandlerRootView, PanGestureHandler, State } from 'react-native-gesture-handler'
-import CustomSafeAreaView from '@components/global/CustomSafeAreaView'
-import ProductSlider from '@components/login/Productslider'
-import { Colors, Fonts, lightColors } from '@utils/Constants'
-import CustomText from '@components/ui/CustomText'
-import { RFValue } from 'react-native-responsive-fontsize'
-import { resetAndNavigate } from '@utils/NavigationUtils'
-import useKeyboardOffsetHeight from '@utils/useKeyboardOffsetHeight'
-import LinearGradient from 'react-native-linear-gradient'
-import CustomInput from '@components/ui/CustomInput'
-import CustomButton from '@components/ui/CustomButton'
-import { customerLogin } from '@service/authService'
+import { View, StyleSheet, SafeAreaView, Animated, Image, Keyboard, Alert, TouchableOpacity, Platform, } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { GestureHandlerRootView, PanGestureHandler, State } from 'react-native-gesture-handler';
+import CustomSafeAreaView from '@components/global/CustomSafeAreaView';
+import ProductSlider from '@components/login/Productslider';
+import { Colors, Fonts, lightColors } from '@utils/Constants';
+import CustomText from '@components/ui/CustomText';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { resetAndNavigate } from '@utils/NavigationUtils';
+import useKeyboardOffsetHeight from '@utils/useKeyboardOffsetHeight';
+import LinearGradient from 'react-native-linear-gradient';
+import CustomInput from '@components/ui/CustomInput';
+import CustomButton from '@components/ui/CustomButton';
+import { customerLogin } from '@service/authService';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const bottomColors = [...lightColors].reverse()
+const bottomColors = [...lightColors].reverse();
 const CustomerLogin = () => {
     const [phoneNumber, setPhoneNumber] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
@@ -23,7 +23,7 @@ const CustomerLogin = () => {
 
     const animatedValue = useRef(new Animated.Value(0)).current;
 
-    let keyboardOffsetHeight = useKeyboardOffsetHeight()
+    let keyboardOffsetHeight = useKeyboardOffsetHeight();
 
     useEffect(() => {
         if (keyboardOffsetHeight === 0) {
@@ -41,11 +41,11 @@ const CustomerLogin = () => {
             }).start();
         }
 
-    }, [keyboardOffsetHeight])
+    }, [keyboardOffsetHeight]);
 
     const handleGesture = ({ nativeEvent }: any) => {
         if (nativeEvent.state === State.END) {
-            const { translationX, translationY } = nativeEvent
+            const { translationX, translationY } = nativeEvent;
             let direction = '';
             if (Math.abs(translationX) > Math.abs(translationY)) {
                 direction = translationX > 0 ? 'right' : 'left';
@@ -56,12 +56,12 @@ const CustomerLogin = () => {
             const newSequence = [...gestureSequence, direction].slice(-5);
             setGestureSequence(newSequence);
             if (newSequence?.join(' ') === 'up up down left right') {
-                setGestureSequence([])
-                resetAndNavigate('DeliveryLogin')
+                setGestureSequence([]);
+                resetAndNavigate('DeliveryLogin');
 
             }
         }
-    }
+    };
 
     const handleAuth = async () => {
         Keyboard.dismiss();
@@ -75,7 +75,7 @@ const CustomerLogin = () => {
         finally {
             setLoading(false);
         }
-    }
+    };
     return (
         <GestureHandlerRootView style={styles.container}>
             <View style={styles.container}>
@@ -101,7 +101,7 @@ const CustomerLogin = () => {
                                 </CustomText>
 
                                 <CustomInput
-                                    onChangeText={(text) => { setPhoneNumber(text.slice(0, 10)) }}
+                                    onChangeText={(text) => { setPhoneNumber(text.slice(0, 10)); }}
                                     onClear={() => setPhoneNumber('')}
                                     value={phoneNumber}
                                     placeholder='Enter your phone number'
@@ -118,7 +118,7 @@ const CustomerLogin = () => {
                                 />
                                 <CustomButton
                                     disabled={phoneNumber.length !== 10}
-                                    onPress={() => { handleAuth() }}
+                                    onPress={() => { handleAuth(); }}
                                     loading={loading}
                                     title='Continue'
                                 />
@@ -137,13 +137,13 @@ const CustomerLogin = () => {
                     </CustomText>
                     <SafeAreaView />
                 </View>
-                <TouchableOpacity style={styles.absoluteSwitchButton} onPress={() => { resetAndNavigate('DeliveryLogin') }}>
+                <TouchableOpacity style={styles.absoluteSwitchButton} onPress={() => { resetAndNavigate('DeliveryLogin'); }}>
                     <Icon name='bike-fast' color={'#000'} size={RFValue(18)} />
                 </TouchableOpacity>
             </View>
         </GestureHandlerRootView >
-    )
-}
+    );
+};
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -214,5 +214,5 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         elevation: 10,
     }
-})
-export default CustomerLogin
+});
+export default CustomerLogin;

@@ -17,3 +17,17 @@ export const customerLogin = async (phone: string) => {
 
     }
 }
+
+export const deliveryLogin = async (email: string, password: string) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/delivery/login`, { email, password });
+        const { accessToken, refreshToken, deliveryPartner } = response.data;
+        tokenstorage.set('accessToken', accessToken);
+        tokenstorage.set('refreshToken', refreshToken);
+        const { setUser } = userAuthStore.getState();
+        setUser(deliveryPartner);
+    } catch (error) {
+        console.error('Customer login error:', error);
+
+    }
+}

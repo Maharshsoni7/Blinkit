@@ -7,7 +7,7 @@ import { navigationRef } from '@utils/NavigationUtils';
 import SplashScreen from '@features/auth/SplashScreen';
 import CustomerLogin from '@features/auth/CustomerLogin';
 import DeliveryLogin from '@features/auth/DeliveryLogin';
-import ProductDashboard from '@features/dashboard/productDashboard';
+import ProductDashboard from '@features/dashboard/ProductDashboard';
 
 
 

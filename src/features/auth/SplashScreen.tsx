@@ -1,5 +1,5 @@
-import { View, StyleSheet, Image } from 'react-native'
-import React, { FC, useEffect } from 'react'
+import { View, StyleSheet, Image } from 'react-native';
+import React, { FC, useEffect } from 'react';
 import { Colors } from '@utils/Constants';
 import Logo from '@assets/images/logo.jpeg'; // Adjust the path as necessary
 import { screenHeight, screenWidth } from '@utils/Scaling';
@@ -15,7 +15,7 @@ const SplashScreen: FC = () => {
       catch (error) {
         console.error('Error navigating from SplashScreen:', error);
       }
-    }
+    };
     const timer = setTimeout(navigateUser, 2000);
     return () => clearTimeout(timer);
   }, []);
@@ -38,5 +38,5 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 
-})
+});
 export default SplashScreen;
