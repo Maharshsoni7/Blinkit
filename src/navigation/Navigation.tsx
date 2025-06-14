@@ -8,6 +8,7 @@ import SplashScreen from '@features/auth/SplashScreen';
 import CustomerLogin from '@features/auth/CustomerLogin';
 import DeliveryLogin from '@features/auth/DeliveryLogin';
 import ProductDashboard from '@features/dashboard/ProductDashboard';
+import DeliveryDashboard from '@features/delivery/DeliveryDashboard';
 
 
 
@@ -32,6 +33,9 @@ const Navigation: FC = () => (
             />
             <Stack.Screen
                 name={'ProductDashboard'} options={{ headerShown: false }} component={ProductDashboard}
+            />
+            <Stack.Screen
+                name={'DeliveryDashboard'} options={{ headerShown: false }} component={DeliveryDashboard}
             />
             <Stack.Screen
                 name={'CustomerLogin'} options={{ animation: 'fade' }} component={CustomerLogin}

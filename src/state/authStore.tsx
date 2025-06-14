@@ -12,7 +12,7 @@ interface AuthStoreProps {
 
 }
 
-export const userAuthStore = create<AuthStoreProps>()(
+export const useAuthStore = create<AuthStoreProps>()(
 
     persist(
         (set,) => ({

@@ -22,8 +22,8 @@ const DeliveryLogin: FC = () => {
     const handleLogin = async () => {
         setLoading(true);
         try {
-            await deliveryLogin(email, password);
-            resetAndNavigate('');
+            // await deliveryLogin(email, password);
+            resetAndNavigate('DeliveryDashboard');
         } catch (error) {
             console.error('Delivery login error:', error);
         } finally {
