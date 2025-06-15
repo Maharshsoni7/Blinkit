@@ -1,17 +1,19 @@
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
+import { View, StyleSheet, SafeAreaView } from 'react-native'
 import React from 'react'
 import { NoticeHeight } from '@utils/Scaling'
 import CustomText from '@components/ui/CustomText'
 import { Fonts } from '@utils/Constants'
-import { def, Defs, G, Path, Svg, Use } from 'react-native-svg'
+import { Defs, G, Path, Svg, Use } from 'react-native-svg'
 import { wavyData } from '@utils/dummyData'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const Notice = () => {
+    const insets = useSafeAreaInsets()
     return (
         <View style={{ height: NoticeHeight }}>
             <View style={styles.container}>
                 <View style={styles.noticeContainer}>
-                    <SafeAreaView style={{ padding: 10 }}>
+                    <SafeAreaView style={{ padding: 10, paddingTop: insets?.top || 20 }}>
                         <CustomText
                             style={styles.heading}
                             variant="h8"
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#CCD5E4'
     },
     noticeContainer: {
+        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#CCD5E4'
